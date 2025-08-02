@@ -67,3 +67,4 @@ if ($PSCmdlet.ShouldProcess($VersionTag, "gh release create")) {
         gh release create $VersionTag --generate-notes --verify-tag --title "Release $VersionTag (PreRelease)"  --prerelease
     }
 }
+

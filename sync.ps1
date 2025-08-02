@@ -31,3 +31,4 @@ Save-UrlContentToFile -File 'sync.ps1'                     -Folder $MODULE_PATH 
 
 Save-UrlContentToFile -File 'release.ps1'                  -Folder $MODULE_PATH    -Url 'https://raw.githubusercontent.com/rulasg/TestingHelper/main/private/templates/template.v3.release.ps1'
 Save-UrlContentToFile -File 'test.ps1'                     -Folder $MODULE_PATH    -Url 'https://raw.githubusercontent.com/rulasg/TestingHelper/main/private/templates/template.v3.test.ps1'
+
