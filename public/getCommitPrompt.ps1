@@ -2,7 +2,7 @@ function Get-AiMessageForCommit{
     [CmdletBinding()]
     [alias("aicm")]
     param(
-        [Parameter()]$Model = "openai/gpt-4.1",
+        [Parameter()]$Model = "openai/gpt-5-mini",
         [Parameter()]$Prompt
     )
 
@@ -33,11 +33,16 @@ function Get-AiMessageForCommit{
     $p += "User description of the changes: [ $Prompt ]"
     $usrprompt = $p -join "`n"
 
-    Write-Verbose "Module: $Model"
     Write-Verbose "SysPrompt: $sysPrompt"
     Write-Verbose "UsrPrompt: $usrprompt"
+    Write-Verbose "Module: $Model"
 
+    # Run and measure how long it takes
+    $sw = [System.Diagnostics.Stopwatch]::StartNew()
     $message = gh models run $Model "$usrprompt" --system-prompt $sysPrompt
+    $sw.Stop()
+    $global:LastAiMessageDuration = $sw.Elapsed
+    Write-Verbose ("AI commit message generation took {0:N2}s" -f $sw.Elapsed.TotalSeconds)
 
     $global:message = $message | Out-String
 
